@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <h1>😊 Emotion Detection System</h1>
+        <p>AI-based Facial Emotion Recognition</p>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Upload Card -->
+        <div class="card">
+            <h2>📤 Upload Image</h2>
+            <form action="/predict" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <button type="submit" class="btn">Detect Emotion</button>
+            </form>
+        </div>
+
+        <!-- Webcam Card -->
+        <div class="card">
+            <h2>🎥 Live Detection</h2>
+            <button class="btn webcam-btn"
+                onclick="window.location.href='/webcam'">
+                Start Webcam
+            </button>
+        </div>
+
+        <!-- Result -->
+        {% if emotion %}
+        <div class="card result-card">
+            <h2>✨ Result</h2>
+            <p class="result-text">{{ emotion | upper }}</p>
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}"
+            class="result-img">
+
+           
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
